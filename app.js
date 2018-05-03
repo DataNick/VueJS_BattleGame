@@ -2,6 +2,8 @@ new Vue({
   el: "#app",
   data: {
     startGame: false,
+    youHealth: 100,
+    monsterHealth: 100,
     battleLog: [],
     youStyle: {
       backgroundColor: 'green',
@@ -25,7 +27,7 @@ new Vue({
       console.log("Heal thyself");
     },
     giveUp: function(){
-      console.log("Run Away!");
+      this.startGame = false;
     }
   }
 })
