@@ -13,7 +13,7 @@
             <h1 class="text-center">YOU</h1>
             <div class="healthbar">
                 <div class="healthbar text-center" v-bind:style="youStyle">
-
+                    {{ youHealth }}
                 </div>
             </div>
         </div>
@@ -21,17 +21,17 @@
             <h1 class="text-center">MONSTER</h1>
             <div class="healthbar">
                 <div class="healthbar text-center" v-bind:style="monsterStyle">
-
+                    {{ monsterHealth }}
                 </div>
             </div>
         </div>
     </section>
     <section class="row controls" v-if="!startGame">
         <div class="small-12 columns">
-            <button id="start-game" v-on:click="startGame=!startGame">START NEW GAME</button>
+            <button id="start-game" v-on:click="startGame=true">START NEW GAME</button>
         </div>
     </section>
-    <section class="row controls" v-if="startGame">
+    <section class="row controls" v-else>
         <div class="small-12 columns">
             <button id="attack" v-on:click="setAttack">ATTACK</button>
             <button id="special-attack" v-on:click="specialAttack">SPECIAL ATTACK</button>
