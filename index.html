@@ -39,15 +39,18 @@
             <button id="give-up" v-on:click="giveUp">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
-        <div class="small-12 columns">
-            <ul>
-                <li>
+    <template v-if="startGame">
+        <section class="row log" v-if="!battleLog.length == 0">
+            <div class="small-12 columns">
+                <ul>
+                    <li v-for="object in battleLog" v-bind:class="[object.type + '-turn']">
+                        {{ object.message }}
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </template>
 
-                </li>
-            </ul>
-        </div>
-    </section>
 </div>
 <script type="text/javascript" src="app.js"></script>
 </body>
