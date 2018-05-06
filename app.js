@@ -41,7 +41,7 @@ new Vue({
       this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
       this.monsterHealth = this.monsterStyle.width.split('%')[0];
 
-      var playerHit = Math.round((Math.random() * (15 - 1) + 1))
+      var playerHit = Math.round((Math.random() * (10 - 1) + 1))
       this.youStyle.width = this.youStyle.width.split('%')[0] - playerHit + '%';
       this.youHealth = this.youStyle.width.split('%')[0];
       var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
@@ -50,16 +50,20 @@ new Vue({
     },
     setHeal: function(){
       console.log("Heal thyself");
+      var maxHealth
+      this.youStyle.width = this.youStyle.width.split('%')[0] +
       this.youHealth < '80' ? this.battleLog.unshift({type: 'player', message: 'You gained 5 points'}) : alert('Can not give health up.');
       //heal after health reach below a certain point. Shouldn't be able to heal when person is above 75%
     },
     giveUp: function(){
-      this.startGame = false;
-      this.battleLog = [];
-      this.youHealth = 100;
-      this.monsterHealth = 100;
-      this.youStyle.width = '100%';
-      this.monsterStyle.width = '100%';
+      if (confirm("Are you sure you want to start over?")) {
+        this.startGame = false;
+        this.battleLog = [];
+        this.youHealth = 100;
+        this.monsterHealth = 100;
+        this.youStyle.width = '100%';
+        this.monsterStyle.width = '100%';
+      }
     }
   }
 })
