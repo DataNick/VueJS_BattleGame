@@ -34,8 +34,19 @@ new Vue({
       //add to the battleLog to show person and monster points taken away
     },
     specialAttack: function(){
-      console.log('special attack');
+      // console.log('special attack');
       //should double the impact
+      var monsterHit = Math.round((Math.random() * (25 - 1) + 1))
+      console.log(monsterHit)
+      this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
+      this.monsterHealth = this.monsterStyle.width.split('%')[0];
+
+      var playerHit = Math.round((Math.random() * (15 - 1) + 1))
+      this.youStyle.width = this.youStyle.width.split('%')[0] - playerHit + '%';
+      this.youHealth = this.youStyle.width.split('%')[0];
+      var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
+      var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
+      this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: "player", message: "Player hits monster for " + monsterHit + "."});
     },
     setHeal: function(){
       console.log("Heal thyself");
