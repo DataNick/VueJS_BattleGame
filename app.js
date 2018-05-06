@@ -20,13 +20,16 @@ new Vue({
   },
   methods: {
     setAttack: function(){
-      console.log("attack!");
-      this.monsterStyle.width = "50%"
-      this.youStyle.width = "80%"
-      console.log(this.monsterStyle.width)
+      var monsterHit = Math.round((Math.random() * (15 - 1) + 1))
+      this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
       this.monsterHealth = this.monsterStyle.width.split('%')[0];
+
+      var playerHit = Math.round((Math.random() * (15 - 1) + 1))
+      this.youStyle.width = this.youStyle.width.split('%')[0] - playerHit + '%';
       this.youHealth = this.youStyle.width.split('%')[0];
-      this.battleLog.unshift({type: "player", message: "You lost 20%"}, {type: "monster", message: "Monster lost 50%"});
+      var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
+      var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
+      this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: "player", message: "Player hits monster for " + monsterHit + "."});
       //how should points vs injuries be determined. Randomly?
       //add to the battleLog to show person and monster points taken away
     },
