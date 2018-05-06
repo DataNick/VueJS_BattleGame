@@ -37,12 +37,13 @@ new Vue({
       // console.log('special attack');
       //should double the impact
       var monsterHit = Math.round((Math.random() * (25 - 1) + 1))
-      console.log(monsterHit)
+      // console.log(monsterHit)
       this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
       this.monsterHealth = this.monsterStyle.width.split('%')[0];
 
       var playerHit = Math.round((Math.random() * (10 - 1) + 1))
       this.youStyle.width = this.youStyle.width.split('%')[0] - playerHit + '%';
+      console.log(this.youStyle.width.split('%')[0] - playerHit + '%')
       this.youHealth = this.youStyle.width.split('%')[0];
       var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
       var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
@@ -50,9 +51,15 @@ new Vue({
     },
     setHeal: function(){
       console.log("Heal thyself");
-      var maxHealth
-      this.youStyle.width = this.youStyle.width.split('%')[0] +
-      this.youHealth < '80' ? this.battleLog.unshift({type: 'player', message: 'You gained 5 points'}) : alert('Can not give health up.');
+      if (this.youHealth < '80') {
+        var maxHealth = 10;
+        this.youStyle.width = Number(this.youStyle.width.split('%')[0]) + maxHealth + '%';
+        this.youHealth = this.youStyle.width.split('%')[0];
+        this.battleLog.unshift({type: 'player', message: 'You gained ' + maxHealth + ' points'});
+
+      } else {
+        alert('Can not give health up.');
+      }
       //heal after health reach below a certain point. Shouldn't be able to heal when person is above 75%
     },
     giveUp: function(){
