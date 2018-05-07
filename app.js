@@ -19,6 +19,11 @@ new Vue({
     }
   },
   methods: {
+    startGame: function(){
+      this.gameIsRunning = true;
+      this.youHealth = 100;
+      this.monsterHealth = 100;
+    },
     setAttack: function(){
       var monsterHit = Math.round((Math.random() * (15 - 1) + 1))
       this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
