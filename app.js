@@ -24,7 +24,7 @@ new Vue({
       this.youHealth = 100;
       this.monsterHealth = 100;
     },
-    setAttack: function(){
+    attack: function(){
       var monsterHit = Math.round((Math.random() * (15 - 1) + 1))
       this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
       this.monsterHealth = this.monsterStyle.width.split('%')[0];
@@ -65,7 +65,7 @@ new Vue({
         this.giveUp();
       }
     },
-    setHeal: function(){
+    heal: function(){
       console.log("Heal thyself");
       if (this.youHealth < '80') {
         var maxHealth = Math.round((Math.random() * (15 - 1) + 1));
