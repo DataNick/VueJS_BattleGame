@@ -25,23 +25,45 @@ new Vue({
       this.monsterHealth = 100;
     },
     attack: function(){
-      var monsterHit = Math.round((Math.random() * (15 - 1) + 1))
-      this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
-      this.monsterHealth = this.monsterStyle.width.split('%')[0];
+      var max = 10;
+      var min = 3;
+      var damage = Math.max(Math.floor(Math.random() * max) +1, min);
+      this.monsterHealth -= damage;
 
-      var playerHit = Math.round((Math.random() * (15 - 1) + 1))
-      this.youStyle.width = this.youStyle.width.split('%')[0] - playerHit + '%';
-      this.youHealth = this.youStyle.width.split('%')[0];
-      var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
-      var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
-      this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: "player", message: "Player hits monster for " + monsterHit + "."});
       if (this.monsterHealth <= 0) {
         alert('You Won!');
-        this.giveUp();
-      } else if (this.youHealth <= 0) {
-        alert('You Lost!');
-        this.giveUp();
+        this.gameIsRunning = false;
+        return;
       }
+
+      max = 12;
+      min = 5;
+      damage = Math.max(Math.floor(Math.random() * max) +1, min);
+      this.youHealth -= damage;
+
+      if (this.youHealth <= 0) {
+        alert('You Lost!');
+        this.gameIsRunning = false;
+        return;
+      }
+
+      // var monsterHit = Math.round((Math.random() * (15 - 1) + 1))
+      // this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
+      // this.monsterHealth = this.monsterStyle.width.split('%')[0];
+
+      // var playerHit = Math.round((Math.random() * (15 - 1) + 1))
+      // this.youStyle.width = this.youStyle.width.split('%')[0] - playerHit + '%';
+      // this.youHealth = this.youStyle.width.split('%')[0];
+      // var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
+      // var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
+      // this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: "player", message: "Player hits monster for " + monsterHit + "."});
+      // if (this.monsterHealth <= 0) {
+      //   alert('You Won!');
+      //   this.giveUp();
+      // } else if (this.youHealth <= 0) {
+      //   alert('You Lost!');
+      //   this.giveUp();
+      // }
     },
     specialAttack: function(){
       var monsterHit = Math.round((Math.random() * (25 - 1) + 1));
