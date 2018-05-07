@@ -30,9 +30,11 @@ new Vue({
       var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
       var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
       this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: "player", message: "Player hits monster for " + monsterHit + "."});
-      if (this.monsterHealth < 0) {
+      if (this.monsterHealth <= 0) {
+        alert('You Won!');
         this.giveUp();
-      } else if (this.youHealth < 0) {
+      } else if (this.youHealth <= 0) {
+        alert('You Lost!');
         this.giveUp();
       }
     },
@@ -50,10 +52,10 @@ new Vue({
       var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
       this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: "player", message: "Player hits monster for " + monsterHit + "."});
 
-      if (this.monsterHealth < 0) {
+      if (this.monsterHealth <= 0) {
         alert('You Won!');
         this.giveUp();
-      } else if (this.youHealth < 0) {
+      } else if (this.youHealth <= 0) {
         alert('You Lost!');
         this.giveUp();
       }
