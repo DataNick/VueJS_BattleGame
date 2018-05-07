@@ -1,7 +1,7 @@
 new Vue({
   el: "#app",
   data: {
-    startGame: false,
+    gameIsRunning: false, //check if game is running
     youHealth: 100,
     monsterHealth: 100,
     battleLog: [],
