@@ -30,14 +30,10 @@ new Vue({
       var newPlayerWidth = 100 - this.youStyle.width.split('%')[0];
       var newMonsterWidth = 100 - this.monsterStyle.width.split('%')[0];
       this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: "player", message: "Player hits monster for " + monsterHit + "."});
-      //how should points vs injuries be determined. Randomly?
-      //add to the battleLog to show person and monster points taken away
     },
     specialAttack: function(){
-      // console.log('special attack');
-      //should double the impact
-      var monsterHit = Math.round((Math.random() * (25 - 1) + 1))
-      // console.log(monsterHit)
+      var monsterHit = Math.round((Math.random() * (25 - 1) + 1));
+
       this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
       this.monsterHealth = this.monsterStyle.width.split('%')[0];
 
@@ -52,15 +48,16 @@ new Vue({
     setHeal: function(){
       console.log("Heal thyself");
       if (this.youHealth < '80') {
-        var maxHealth = 10;
-        this.youStyle.width = Number(this.youStyle.width.split('%')[0]) + maxHealth + '%';
+        var maxHealth = Math.round((Math.random() * (15 - 1) + 1));
+        var playerHit = Math.round((Math.random() * (8 - 1) + 1));
+        var finalHealth = Math.max(maxHealth, playerHit) - Math.min(maxHealth, playerHit)
+        this.youStyle.width = Number(this.youStyle.width.split('%')[0]) + finalHealth + '%';
         this.youHealth = this.youStyle.width.split('%')[0];
-        this.battleLog.unshift({type: 'player', message: 'You gained ' + maxHealth + ' points'});
 
+        this.battleLog.unshift({type: "monster", message: "Monster hits player for " + playerHit + "."}, {type: 'player', message: 'You gained ' + maxHealth + ' points'});
       } else {
         alert('Can not give health up.');
       }
-      //heal after health reach below a certain point. Shouldn't be able to heal when person is above 75%
     },
     giveUp: function(){
       if (confirm("Are you sure you want to start over?")) {
