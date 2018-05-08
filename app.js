@@ -78,6 +78,12 @@ new Vue({
       // }
     },
     heal: function(){
+      if (this.youHealth <= 90) {
+        this.youHealth += 10;
+      } else {
+        this.youHealth = 100;
+      }
+      this.monsterAttacks();
       // console.log("Heal thyself");
       // if (this.youHealth < '80') {
       //   var maxHealth = Math.round((Math.random() * (15 - 1) + 1));
