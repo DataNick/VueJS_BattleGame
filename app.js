@@ -4,19 +4,20 @@ new Vue({
     gameIsRunning: false, //check if game is running
     youHealth: 100,
     monsterHealth: 100,
-    battleLog: [],
-    youStyle: {
-      backgroundColor: 'green',
-      margin: 0,
-      color: 'white',
-      width: '100%'
-    },
-    monsterStyle: {
-      backgroundColor: 'green',
-      margin: 0,
-      color: 'white',
-      width: '100%'
-    }
+    // battleLog: [],
+    turns: []
+    // youStyle: {
+    //   backgroundColor: 'green',
+    //   margin: 0,
+    //   color: 'white',
+    //   width: '100%'
+    // },
+    // monsterStyle: {
+    //   backgroundColor: 'green',
+    //   margin: 0,
+    //   color: 'white',
+    //   width: '100%'
+    // }
   },
   methods: {
     startGame: function(){
@@ -25,7 +26,12 @@ new Vue({
       this.monsterHealth = 100;
     },
     attack: function(){
-      this.monsterHealth -= this.calculateDamage(3, 10);
+      var damage = this.calculateDamage(3, 10);
+      this.monsterHealth -= damage;
+      this.turns.unshift = {
+        isPlayer: true,
+        text: 'Player hits Monster for ' + damage + '.';
+      }
       if (this.checkWin()) {
         return;
       }
@@ -110,13 +116,18 @@ new Vue({
       // }
     },
     monsterAttacks: function() {
-      this.youHealth -= this.calculateDamage(5, 12);
+      var damage = this.calculateDamage(5, 12);;
+      this.youHealth -= damage
       this.checkWin();
+      this.turns.unshift = {
+        isPlayer: false,
+        text: 'Monster hits Player for ' + damage + '.';
+      }
     },
     calculateDamage: function(min, max) {
       return Math.max(Math.floor(Math.random() * max) +1, min);
     },
-    checkWin: function(playerHealth) {
+    checkWin: function() {
       if (this.monsterHealth <= 0) {
         if (confirm("You won. New game?")) {
           this.startGame();
