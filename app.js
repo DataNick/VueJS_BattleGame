@@ -25,25 +25,11 @@ new Vue({
       this.monsterHealth = 100;
     },
     attack: function(){
-      var damage = calculateDamage(3, 10);
-      this.monsterHealth -= damage;
+      this.monsterHealth -= this.calculateDamage(3, 10);;
 
-      if (this.monsterHealth <= 0) {
-        alert('You Won!');
-        this.gameIsRunning = false;
-        return;
-      }
+      if (this.checkWin() {
 
-      max = 12;
-      min = 5;
-      damage = calculateDamage(5, 12);
-      this.youHealth -= damage;
-
-      if (this.youHealth <= 0) {
-        alert('You Lost!');
-        this.gameIsRunning = false;
-
-      }
+      })
 
       // var monsterHit = Math.round((Math.random() * (15 - 1) + 1))
       // this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
@@ -111,6 +97,24 @@ new Vue({
     },
     calculateDamage: function(min, max) {
       return Math.max(Math.floor(Math.random() * max) +1, min);
+    },
+    checkWin: function(playerHealth) {
+      if (this.monsterHealth <= 0) {
+        if (confirm("You won. New game?")) {
+          this.startGame();
+        } else {
+            this.gameIsRunning = false;
+        }
+        return true;
+      } else if (this.youHealth <= 0) {
+        if (confirm("You lost. New game?")) {
+          this.startGame();
+        } else {
+            this.gameIsRunning = false;
+        }
+        return true;
+      }
+      return false;
     }
   }
 })
