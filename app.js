@@ -28,10 +28,10 @@ new Vue({
     attack: function(){
       var damage = this.calculateDamage(3, 10);
       this.monsterHealth -= damage;
-      this.turns.unshift = {
+      this.turns.unshift({
         isPlayer: true,
-        text: 'Player hits Monster for ' + damage + '.';
-      }
+        text: 'Player hits Monster for ' + damage
+      })
       if (this.checkWin()) {
         return;
       }
@@ -119,10 +119,10 @@ new Vue({
       var damage = this.calculateDamage(5, 12);;
       this.youHealth -= damage
       this.checkWin();
-      this.turns.unshift = {
+      this.turns.unshift({
         isPlayer: false,
-        text: 'Monster hits Player for ' + damage + '.';
-      }
+        text: 'Monster hits Player for ' + damage
+      })
     },
     calculateDamage: function(min, max) {
       return Math.max(Math.floor(Math.random() * max) +1, min);
