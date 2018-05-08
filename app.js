@@ -25,12 +25,12 @@ new Vue({
       this.monsterHealth = 100;
     },
     attack: function(){
-      this.monsterHealth -= this.calculateDamage(3, 10);;
+      this.monsterHealth -= this.calculateDamage(3, 10);
+      if (this.checkWin()) {
+        return;
+      }
 
-      if (this.checkWin() {
-
-      })
-
+      this.monsterAttacks();
       // var monsterHit = Math.round((Math.random() * (15 - 1) + 1))
       // this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
       // this.monsterHealth = this.monsterStyle.width.split('%')[0];
@@ -50,6 +50,12 @@ new Vue({
       // }
     },
     specialAttack: function(){
+      this.monsterHealth -= this.calculateDamage(10, 20);
+      if (this.checkWin()) {
+        return;
+      }
+
+      this.monsterAttacks();
       // var monsterHit = Math.round((Math.random() * (25 - 1) + 1));
 
       // this.monsterStyle.width = this.monsterStyle.width.split('%')[0] - monsterHit + '%';
@@ -94,6 +100,10 @@ new Vue({
       //   this.youStyle.width = '100%';
       //   this.monsterStyle.width = '100%';
       // }
+    },
+    monsterAttacks: function() {
+      this.youHealth -= this.calculateDamage(5, 12);
+      this.checkWin();
     },
     calculateDamage: function(min, max) {
       return Math.max(Math.floor(Math.random() * max) +1, min);
