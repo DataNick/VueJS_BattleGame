@@ -98,6 +98,8 @@ new Vue({
       // }
     },
     giveUp: function(){
+      this.gameIsRunning = false;
+
       // if (confirm("Are you sure you want to start over?")) {
       //   this.startGame = false;
       //   this.battleLog = [];
